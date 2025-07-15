@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Github, Mail, X, Check } from 'lucide-react';
 
 const Contact = () => {

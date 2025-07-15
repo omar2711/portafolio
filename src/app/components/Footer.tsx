@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
             </h3>
             <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Always excited to collaborate on innovative projects and bring creative ideas to life. 
-              Let's build something amazing together!
+              Let&apos;s build something amazing together!
             </p>
           </div>
           

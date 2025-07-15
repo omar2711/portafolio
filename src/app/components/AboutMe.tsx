@@ -5,6 +5,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
+
+
 const ProjectCarousel = dynamic(() => import('./projects/ProjectCarousel'), {
   ssr: false,
   loading: () => (

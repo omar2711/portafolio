@@ -1,4 +1,5 @@
 import React, { useState, Suspense, useEffect } from 'react';
+import Image from 'next/image';
 import { projects } from './data';
 
 const ProjectCarousel: React.FC = () => {
@@ -97,12 +98,14 @@ const ProjectCarousel: React.FC = () => {
               }`}
               style={{ transitionDelay: isVisible ? '100ms' : '0ms' }}
             >
-              <div className="w-full max-w-sm sm:max-w-md lg:max-w-2xl h-32 sm:h-36 md:h-40 lg:h-80 rounded-lg overflow-hidden border-2 border-white border-opacity-30 transition-all duration-300 hover:border-opacity-50">
+              <div className="w-full max-w-sm sm:max-w-md lg:max-w-2xl h-32 sm:h-36 md:h-40 lg:h-80 rounded-lg overflow-hidden border-2 border-white border-opacity-30 transition-all duration-300 hover:border-opacity-50 relative">
                 {currentProject.image ? (
-                  <img
+                  <Image
                     src={currentProject.image}
                     alt={currentProject.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 ) : (
                   <div className="flex items-center justify-center h-full bg-black bg-opacity-20 text-white">
