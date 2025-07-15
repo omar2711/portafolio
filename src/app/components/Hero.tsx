@@ -12,7 +12,6 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
   const [particlesKey, setParticlesKey] = useState(0)
   const [showScrollButton, setShowScrollButton] = useState(true)
   const progressRef = useRef({ value: 0, lastTime: 0 })
-  const requestRef = useRef<number>(0)
   const textRef = useRef<HTMLHeadingElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
 
