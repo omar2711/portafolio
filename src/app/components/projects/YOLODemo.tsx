@@ -8,22 +8,43 @@ const YOLODemo: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
   const detectObjects = async (imageFile: File) => {
     setProcessing(true);
     setError(null);
     setResultImage(null);
 
+    if (!API_BASE_URL || !API_KEY) {
+      setError('API no configurada.');
+      setProcessing(false);
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('file', imageFile);
 
-      const response = await fetch('http://localhost:8000/predict-image', {
+      const response = await fetch(`${API_BASE_URL}/predict-image`, {
         method: 'POST',
+        headers: {
+          'X-API-Key': API_KEY,
+        },
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
+        const errorText = await response.text();
+        if (response.status === 403) {
+          throw new Error('API key inválida o acceso denegado');
+        } else if (response.status === 429) {
+          throw new Error('Límite de requests excedido. Intenta más tarde.');
+        } else if (response.status === 413) {
+          throw new Error('Imagen demasiado grande. Máximo 10MB.');
+        } else {
+          throw new Error(`Error ${response.status}: ${errorText || response.statusText}`);
+        }
       }
 
       const imageBlob = await response.blob();
@@ -32,7 +53,7 @@ const YOLODemo: React.FC = () => {
       
     } catch (error) {
       console.error('Error calling detection API:', error);
-      setError(`Error al procesar la imagen: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+      setError(`${error instanceof Error ? error.message : 'Error desconocido'}`);
     } finally {
       setProcessing(false);
     }
@@ -89,6 +110,24 @@ const YOLODemo: React.FC = () => {
     }
   };
 
+  if (!API_BASE_URL || !API_KEY) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="text-center text-white p-4">
+          <div className="text-4xl mb-4">⚠️</div>
+          <h3 className="text-lg font-bold mb-2">API Configuration Missing</h3>
+          <p className="text-sm opacity-75 mb-4">
+            Environment variables not configured.<br/>
+            Contact administrator to enable AI detection.
+          </p>
+          <div className="text-xs opacity-50 bg-gray-900 p-2 rounded">
+            Missing: NEXT_PUBLIC_API_URL or NEXT_PUBLIC_API_KEY
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-full flex flex-col p-2 sm:p-4 lg:p-6">
       <div className="flex flex-col lg:grid lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 flex-1 min-h-0">
@@ -119,7 +158,7 @@ const YOLODemo: React.FC = () => {
               <>
                 <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 lg:h-12 lg:w-12 border-b-2 border-red-400 mx-auto mb-2 sm:mb-3"></div>
                 <h4 className="text-sm sm:text-base lg:text-lg font-bold mb-1 sm:mb-2">Processing...</h4>
-                <p className="text-xs opacity-75">AI analyzing</p>
+                <p className="text-xs opacity-75">AI analyzing with secure API</p>
               </>
             ) : (
               <>
@@ -127,8 +166,8 @@ const YOLODemo: React.FC = () => {
                 <h4 className="text-sm sm:text-base lg:text-lg font-bold mb-1 sm:mb-2">Fire Detection</h4>
                 <p className="text-xs opacity-75 mb-2 sm:mb-3">
                   <span className="block">Drag & drop or click</span>
-                  <span className="block lg:hidden">AI detection</span>
-                  <span className="hidden lg:block">AI-powered detection hosted on an API</span>
+                  <span className="block lg:hidden">Secure AI detection</span>
+                  <span className="hidden lg:block">Secure AI-powered detection via protected API</span>
                 </p>
                 {(resultImage || originalImage) && (
                   <button
@@ -177,6 +216,7 @@ const YOLODemo: React.FC = () => {
               <div className="bg-green-900 bg-opacity-90 text-white p-1 sm:p-2 text-center flex-shrink-0">
                 <p className="text-xs font-bold">
                   ✅ <span className="hidden sm:inline">Detection </span>Complete
+                  <span className="ml-1">🔒</span>
                 </p>
               </div>
             </div>
@@ -191,14 +231,14 @@ const YOLODemo: React.FC = () => {
                 />
               </div>
               <div className="bg-yellow-900 bg-opacity-90 text-white p-1 sm:p-2 text-center flex-shrink-0">
-                <p className="text-xs">⏳ Processing...</p>
+                <p className="text-xs">⏳ Processing securely...</p>
               </div>
             </div>
           ) : (
             <div className="text-white text-center w-full h-full flex items-center justify-center">
               <div>
                 <p className="text-sm sm:text-base mb-1">🖼️ Results</p>
-                <p className="text-xs opacity-75">Upload to start</p>
+                <p className="text-xs opacity-75">Upload to start detection</p>
               </div>
             </div>
           )}
@@ -207,7 +247,8 @@ const YOLODemo: React.FC = () => {
 
       <div className="mt-2 text-center text-xs text-gray-400 flex-shrink-0">
         <p className="truncate">
-          {processing && <span className="ml-1">⚡</span>}
+          {processing && <span className="ml-1">⚡ Secure API processing</span>}
+          {!processing && <span className="opacity-50">🔒 Protected API endpoint</span>}
         </p>
       </div>
     </div>
