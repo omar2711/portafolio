@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
             <p className="text-xs sm:text-sm text-gray-400 flex items-center justify-center gap-2">
               <span>Made with</span>
               <FaHeart className="text-red-400 animate-pulse text-sm" />
-              <span>by Omar Santiago Veizaga Ochoa</span>
+              <span>by Omar Veizaga (me)</span>
             </p>
             <p className="text-xs text-gray-500 mt-2">
               © {new Date().getFullYear()} All rights reserved.

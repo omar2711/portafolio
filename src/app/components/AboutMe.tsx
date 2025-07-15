@@ -155,7 +155,7 @@ const AboutSection = {
   Container: ({ children, className = "", style = {} }: { 
     children: React.ReactNode; 
     className?: string; 
-    style?: React.CSSProperties 
+    style?: React.CSSProperties;
   }) => (
     <div className={`flex items-center justify-center ${className}`} style={style}>
       {children}
@@ -187,10 +187,11 @@ const AboutSection = {
     </div>
   ),
 
-  Title: ({ children, color, className = "" }: {
+  Title: ({ children, color, className = "", style = {} }: {
     children: React.ReactNode;
     color: string;
     className?: string;
+    style?: React.CSSProperties;
   }) => (
     <h3
       className={`mb-2 sm:mb-3 lg:mb-4 text-lg sm:text-xl lg:text-2xl font-bold text-center ${className}`}
@@ -198,6 +199,7 @@ const AboutSection = {
         fontFamily: "'League Script', cursive",
         letterSpacing: "1px",
         color,
+        ...style,
       }}
     >
       {children}
@@ -292,7 +294,7 @@ function AboutMeContent() {
             className="min-h-[200px] sm:min-h-[300px] lg:min-h-[450px]"
           >
             <AboutSection.Title color="#2ee8bb">
-              What I Work With
+              What I've <br/> Worked &nbsp; With
             </AboutSection.Title>
             <div className="flex flex-col gap-2 sm:gap-3 text-center w-full">
               <div className="text-white">
@@ -340,7 +342,9 @@ function AboutMeContent() {
               style={{
                 fontFamily: "'League Script', cursive",
                 letterSpacing: "1px",
-                color: "#ec4899",
+                color: "#ffffffff",
+                textShadow: "0 0 20px #ec4899, 0 0 16px #ec4899, 0 0 24px #ec4899",
+                fontWeight: "800",
               }}
             >
               Skills and Frameworks
@@ -363,7 +367,13 @@ function AboutMeContent() {
             boxShadow="0 0 24px #a5e82e44, 0 0 48px #a5e82e33"
             className="min-h-[200px] sm:min-h-[300px] lg:min-h-[450px]"
           >
-            <AboutSection.Title color="#a5e82e">
+            <AboutSection.Title 
+              color="#85f36aff"
+              className="font-extrabold"
+              style={{
+                fontWeight: "800",
+              }}
+            >
               Currently Learning
             </AboutSection.Title>
             <div className="text-center text-white space-y-1 sm:space-y-2">
