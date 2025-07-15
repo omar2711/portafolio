@@ -1,29 +1,33 @@
-// Number of icons
-export const N = 19;
+export const N = 25;
 
 export const allIcons = [
-  { icon: "django.svg", name: "Django" },
-  { icon: "dotnet.svg", name: ".NET" },
-  { icon: "expo.svg", name: "Expo" },
-  { icon: "express.svg", name: "Express" },
-  { icon: "figma.svg", name: "Figma" },
-  { icon: "github.svg", name: "GitHub" },
-  { icon: "gitlab.svg", name: "GitLab" },
-  { icon: "java.svg", name: "Java" },
-  { icon: "nestjs.svg", name: "NestJS" },
-  { icon: "nextjs.svg", name: "Next.js" },
-  { icon: "node.svg", name: "Node.js" },
-  { icon: "opencv.svg", name: "OpenCV" },
-  { icon: "python.svg", name: "Python" },
-  { icon: "pytorch.svg", name: "PyTorch" },
-  { icon: "railway.svg", name: "Railway" },
-  { icon: "react.svg", name: "React" },
-  { icon: "threejs.svg", name: "Three.js" },
-  { icon: "vuejs.svg", name: "Vue.js" },
-  { icon: "yolo.svg", name: "YOLO" },
+  { icon: "SiDjango", name: "Django" },
+  { icon: "SiDotnet", name: ".NET" },
+  { icon: "SiExpo", name: "Expo" },
+  { icon: "SiExpress", name: "Express" },
+  { icon: "SiFigma", name: "Figma" },
+  { icon: "SiGithub", name: "GitHub" },
+  { icon: "SiGitlab", name: "GitLab" },
+  { icon: "SiJava", name: "Java" },
+  { icon: "SiNestjs", name: "NestJS" },
+  { icon: "SiNextdotjs", name: "Next.js" },
+  { icon: "SiNodedotjs", name: "Node.js" },
+  { icon: "SiOpencv", name: "OpenCV" },
+  { icon: "SiPython", name: "Python" },
+  { icon: "SiPytorch", name: "PyTorch" },
+  { icon: "SiRailway", name: "Railway" },
+  { icon: "SiReact", name: "React" },
+  { icon: "SiThreedotjs", name: "Three.js" },
+  { icon: "SiVuedotjs", name: "Vue.js" },
+  { icon: "SiMysql", name: "MySQL" },
+  { icon: "SiOracle", name: "Oracle" },
+  { icon: "SiPostgresql", name: "PostgreSQL" },
+  { icon: "SiMongodb", name: "MongoDB" },
+  { icon: "SiRedis", name: "Redis" },
+  { icon: "SiTypescript", name: "TypeScript" },
+  { icon: "SiJavascript", name: "JavaScript" },
 ];
 
-// Function to get a position on a sphere for each icon
 export function getSpherePosition(i: number, n: number, radius: number): [number, number, number] {
   const phi = Math.acos(-1 + (2 * i) / n);
   const theta = Math.sqrt(n * Math.PI) * phi;

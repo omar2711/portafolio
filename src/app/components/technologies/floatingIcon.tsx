@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
+import * as ReactIcons from "react-icons/si";
 
 export default function FloatingIcon({
   position,
@@ -26,10 +27,41 @@ export default function FloatingIcon({
     }
   });
 
-  const texture = React.useMemo(() => {
-    const loader = new THREE.TextureLoader();
-    return loader.load(`/images/technologies/${icon}`);
-  }, [icon]);
+  const IconComponent = ReactIcons[icon as keyof typeof ReactIcons];
+
+  const getNeonColor = (iconName: string) => {
+    const neonColors: { [key: string]: string } = {
+      "SiReact": "#61dafb",
+      "SiNextdotjs": "#ffffff", 
+      "SiNodedotjs": "#68a063",
+      "SiJavascript": "#f7df1e",
+      "SiTypescript": "#3178c6",
+      "SiPython": "#3776ab",
+      "SiJava": "#ed8b00",
+      "SiDotnet": "#512bd4",
+      "SiDjango": "#32ff32",
+      "SiExpress": "#ffffff",
+      "SiNestjs": "#e0234e",
+      "SiMysql": "#4479a1",
+      "SiPostgresql": "#336791",
+      "SiMongodb": "#47a248",
+      "SiOracle": "#f80000",
+      "SiDocker": "#2496ed",
+      "SiGithub": "#ffffff",
+      "SiGitlab": "#fca326",
+      "SiRailway": "#ffffff",    
+      "SiThreedotjs": "#ffffff",
+      "SiVuedotjs": "#4fc08d",
+      "SiExpo": "#87ceeb",       
+      "SiFigma": "#f24e1e",
+      "SiOpencv": "#5c3ee8",
+      "SiPytorch": "#ee4c2c",
+      "SiRedis": "#dc382d"
+    };
+    return neonColors[iconName] || "#ffffff";
+  };
+
+  const iconColor = getNeonColor(icon);
 
   return (
     <mesh
@@ -39,7 +71,20 @@ export default function FloatingIcon({
       onPointerOut={() => setHovered(false)}
     >
       <planeGeometry args={[1, 1]} />
-      <meshBasicMaterial map={texture} transparent />
+      <meshBasicMaterial transparent opacity={0} />
+      <Html center transform>
+        <div 
+          style={{ 
+            fontSize: '40px',
+            color: iconColor,
+            filter: `drop-shadow(0 0 8px ${iconColor}) drop-shadow(0 0 16px ${iconColor}40)`,
+            transition: 'all 0.3s ease',
+            pointerEvents: 'none',
+          }}
+        >
+          {IconComponent && <IconComponent />}
+        </div>
+      </Html>
       {hovered && (
         <Html center distanceFactor={8} style={{ pointerEvents: "none" }}>
           <div
@@ -53,6 +98,8 @@ export default function FloatingIcon({
               whiteSpace: "nowrap",
               boxShadow: "0 2px 8px #0003",
               marginTop: "-42px",
+              marginLeft: "150px",
+              transform: "translateX(-30%)",
             }}
           >
             {name}
