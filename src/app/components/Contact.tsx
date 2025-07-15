@@ -9,8 +9,7 @@ const Contact = () => {
   const [showCopiedNotification, setShowCopiedNotification] = useState(false);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [showButtons, setShowButtons] = useState(true);
-  const footerObserverRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsExpanded(true);

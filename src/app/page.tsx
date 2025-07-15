@@ -1,15 +1,11 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import FloatingGroup from "./components/technologies/floatingGroup";
 import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true);
   const [viewportHeight, setViewportHeight] = useState(0);
   const aboutMeRef = useRef<HTMLDivElement>(null);
 
@@ -46,6 +42,7 @@ export default function HomePage() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
+        minHeight: `${viewportHeight}px`,
       }}
     >
       <div className="w-full">

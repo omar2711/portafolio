@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 
 const YOLODemo: React.FC = () => {
   const [processing, setProcessing] = useState(false);
@@ -17,7 +18,7 @@ const YOLODemo: React.FC = () => {
     setResultImage(null);
 
     if (!API_BASE_URL || !API_KEY) {
-      setError('API no configurada.');
+      setError('API no configurada. Contacta al administrador.');
       setProcessing(false);
       return;
     }
@@ -205,11 +206,12 @@ const YOLODemo: React.FC = () => {
 
           {resultImage ? (
             <div className="w-full h-full flex flex-col">
-              <div className="flex-1 flex items-center justify-center p-1 sm:p-2 min-h-0">
-                <img
+              <div className="flex-1 flex items-center justify-center p-1 sm:p-2 min-h-0 relative">
+                <Image
                   src={resultImage}
                   alt="Detection Results"
-                  className="max-w-full max-h-full object-contain rounded"
+                  fill
+                  className="object-contain rounded"
                   style={{ backgroundColor: '#1a1a1a' }}
                 />
               </div>
@@ -222,11 +224,12 @@ const YOLODemo: React.FC = () => {
             </div>
           ) : originalImage && !processing ? (
             <div className="w-full h-full flex flex-col">
-              <div className="flex-1 flex items-center justify-center p-1 sm:p-2 min-h-0">
-                <img
+              <div className="flex-1 flex items-center justify-center p-1 sm:p-2 min-h-0 relative">
+                <Image
                   src={originalImage}
                   alt="Original"
-                  className="max-w-full max-h-full object-contain rounded opacity-50"
+                  fill
+                  className="object-contain rounded opacity-50"
                   style={{ backgroundColor: '#1a1a1a' }}
                 />
               </div>
@@ -247,8 +250,8 @@ const YOLODemo: React.FC = () => {
 
       <div className="mt-2 text-center text-xs text-gray-400 flex-shrink-0">
         <p className="truncate">
-          {processing && <span className="ml-1">⚡ Secure API processing</span>}
-          {!processing && <span className="opacity-50">🔒 Protected API endpoint</span>}
+          {processing && <span className="ml-1">This may take a while :p</span>}
+          {!processing && <span className="opacity-50">Free API endpoint</span>}
         </p>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { ErrorBoundary } from "react-error-boundary";
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 const ProjectCarousel = dynamic(() => import('./projects/ProjectCarousel'), {
   ssr: false,
@@ -44,8 +45,7 @@ const AboutProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   );
 };
 
-const ErrorFallback: React.FC<{ error: Error; resetErrorBoundary: () => void }> = ({ 
-  error, 
+const ErrorFallback: React.FC<{ resetErrorBoundary: () => void }> = ({ 
   resetErrorBoundary 
 }) => (
   <div
@@ -203,18 +203,7 @@ const AboutSection = {
   ),
 };
 
-const useCarousel = (items: any[]) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const next = () => setCurrentIndex((prev) => (prev + 1) % items.length);
-  const prev = () => setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
-  
-  return { currentIndex, next, prev, currentItem: items[currentIndex] };
-};
-
 function AboutMeContent() {
-  const { activeSection, setActiveSection, isLoading } = useAbout();
-
   return (
     <section className="relative z-0 w-full py-8 sm:py-12 lg:py-16 px-2 sm:px-4 flex flex-col gap-4 sm:gap-6 lg:gap-8 mt-20">
       <div className="flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6 max-w-6xl mx-auto w-full">
@@ -243,7 +232,7 @@ function AboutMeContent() {
                 Last-year Computer Systems Engineering student at Universidad
                 del Valle - Bolivia, aspiring Full Stack Developer. I have
                 hands-on experience with modern web technologies like React and
-                Node.js. I'm passionate about building scalable applications and
+                Node.js. I&apos;m passionate about building scalable applications and
                 eager to work on real-world projects where I can learn, grow,
                 and contribute to impactful solutions.
               </p>
@@ -252,7 +241,7 @@ function AboutMeContent() {
         </div>
 
         <ErrorBoundary
-          FallbackComponent={({ error, resetErrorBoundary }) => (
+          FallbackComponent={({ resetErrorBoundary }) => (
             <div className="flex items-center justify-center w-full h-48 sm:h-64">
               <div className="text-center text-red-400">
                 <p className="text-sm">Failed to load image</p>
@@ -278,12 +267,15 @@ function AboutMeContent() {
                   "0 0 20px rgba(165, 232, 46, 0.5), 0 0 40px rgba(46, 232, 187, 0.3)",
               }}
             >
-              <img
+              <Image
                 src="/images/myprofile/yo.jpg"
                 alt="Omar Santiago Veizaga Ochoa"
+                width={224}
+                height={224}
                 className="rounded-full w-full h-full object-cover"
                 style={{ border: "2px solid rgba(255, 255, 255, 0.1)" }}
                 onError={() => console.log("Image failed to load")}
+                priority
               />
             </div>
           </div>
@@ -402,9 +394,9 @@ function AboutMeContent() {
               color: "#2ebce8",
             }}
           >
-            Things I've Built
+            Things I&apos;ve Built
           </h3>
-          <div className="w-full h-64 sm:h-80 lg:h-96 relative">
+          <div className="w-full h-96 sm:h-[32rem] md:h-[36rem] lg:h-96 relative">
             <ProjectCarousel />
           </div>
         </div>
@@ -416,9 +408,9 @@ function AboutMeContent() {
 export default function AboutMe() {
   return (
     <ErrorBoundary
-      FallbackComponent={({ error, resetErrorBoundary }) => (
+      FallbackComponent={({ resetErrorBoundary }) => (
         <div className="flex items-center justify-center min-h-screen px-4">
-          <ErrorFallback error={error} resetErrorBoundary={resetErrorBoundary} />
+          <ErrorFallback resetErrorBoundary={resetErrorBoundary} />
         </div>
       )}
     >

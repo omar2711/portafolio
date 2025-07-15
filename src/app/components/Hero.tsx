@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { FaGithub, FaChevronDown } from 'react-icons/fa'
+import { FaChevronDown } from 'react-icons/fa'
 import Typewriter from 'typewriter-effect'
 import './components.css'
 import HeroParticles from './HeroParticles'
@@ -9,15 +9,11 @@ interface HeroProps {
 }
 
 export default function Hero({ onScrollToAbout }: HeroProps) {
-  const [isSticky, setIsSticky] = useState(false)
-  const [isHovering, setIsHovering] = useState(false)
   const [particlesKey, setParticlesKey] = useState(0)
   const [showScrollButton, setShowScrollButton] = useState(true)
   const progressRef = useRef({ value: 0, lastTime: 0 })
   const requestRef = useRef<number>(0)
   const textRef = useRef<HTMLHeadingElement>(null)
-  const diagonalRef = useRef<HTMLDivElement>(null);
-  const sentinelRef = useRef<HTMLDivElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -59,30 +55,6 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
     requestRef.current = requestAnimationFrame(animate)
   }
 
-  useEffect(() => {
-    if (isHovering) {
-      progressRef.current.lastTime = 0
-      requestRef.current = requestAnimationFrame(animate)
-    } else {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current)
-      }
-    }
-    return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current)
-      }
-    }
-  }, [isHovering])
-
-  useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setIsSticky(entry.boundingClientRect.top <= 0),
-      { threshold: [0] }
-    )
-    if (sentinelRef.current) observer.observe(sentinelRef.current)
-    return () => observer.disconnect()
-  }, [])
 
   return (
     <div className="relative" ref={heroRef}>
