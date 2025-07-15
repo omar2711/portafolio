@@ -17,7 +17,7 @@ const YOLODemo: React.FC = () => {
       const formData = new FormData();
       formData.append('file', imageFile);
 
-      const response = await fetch('http://localhost:8005/predict-image', {
+      const response = await fetch('http://localhost:8000/predict-image', {
         method: 'POST',
         body: formData,
       });

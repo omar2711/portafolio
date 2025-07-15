@@ -1,37 +1,201 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Personal Portfolio - Omar Santiago Veizaga Ochoa
 
-## Getting Started
+> A modern, interactive portfolio showcasing full-stack development skills with cutting-edge web technologies.
 
-First, run the development server:
+![Portfolio Preview](./public/images/portfolio-preview.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+
+### 🎨 **Interactive Design**
+- **3D Particle System** - Dynamic floating particles with Three.js
+- **Smooth Animations** - GSAP-powered transitions and effects
+- **Neon Aesthetics** - Custom glowing elements and gradients
+- **Responsive Layout** - Optimized for all device sizes
+
+### 🛠️ **Technical Highlights**
+- **Next.js 15** - Latest React framework with App Router
+- **TypeScript** - Full type safety and better developer experience
+- **Tailwind CSS** - Utility-first styling with custom components
+- **Three.js** - 3D graphics and interactive elements
+- **Custom Scrollbars** - Neon-themed scrollbar design
+
+### 📱 **Interactive Components**
+- **Project Carousel** - Smooth transitions between projects
+- **YOLO Demo** - Live AI model demonstration
+- **Contact System** - Floating contact buttons with modal
+- **Auto-hide Elements** - Smart UI that adapts to scroll position
+
+## 🌟 Projects Showcase
+
+### 1. **Fire & Smoke Detection AI**
+- Real-time YOLO-based computer vision
+- **Tech:** Python, YOLO, OpenCV, PyTorch
+- **Demo:** Interactive model showcase
+
+### 2. **BlokisLabs Frontend**
+- Blockchain and Web3 platform development
+- **Tech:** React, TypeScript, Next.js, Web3
+- **Role:** Frontend Development Team Member
+
+### 3. **CraterOdyssey Game**
+- 3D adventure game for game jam
+- **Tech:** Unity, C#, Game Design, 3D Graphics
+- **Platform:** Available on itch.io
+
+### 4. **This Portfolio**
+- Modern web development showcase
+- **Tech:** Next.js 15, React, TypeScript, Three.js, Tailwind CSS
+
+## 🚀 Tech Stack
+
+### **Frontend**
+```
+Next.js 15      React 19        TypeScript
+Tailwind CSS    Three.js        GSAP
+React Icons     Typewriter      Lucide Icons
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **Development Tools**
+```
+ESLint          Prettier        Git
+VS Code         Node.js         npm
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **Deployment**
+```
+Vercel          GitHub Pages    Custom Domain
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔧 Installation & Setup
 
-## Learn More
+```bash
+# Clone the repository
+git clone https://github.com/omar2711/portfolio.git
 
-To learn more about Next.js, take a look at the following resources:
+# Navigate to project directory
+cd portfolio
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Install dependencies
+npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Start development server
+npm run dev
 
-## Deploy on Vercel
+# Build for production
+npm run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Start production server
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
 
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── Hero.tsx              # Landing section with particles
+│   │   ├── AboutMe.tsx           # About section with tech stack
+│   │   ├── Contact.tsx           # Floating contact buttons
+│   │   ├── Footer.tsx            # Footer with neon effects
+│   │   └── projects/
+│   │       ├── ProjectCarousel.tsx   # Project showcase carousel
+│   │       ├── YOLODemo.tsx         # Interactive AI demo
+│   │       └── data.ts              # Project data
+│   ├── globals.css               # Global styles & animations
+│   ├── layout.tsx               # Root layout
+│   └── page.tsx                 # Main page component
+├── public/
+│   ├── images/                  # Project images & assets
+│   └── models/                  # 3D models (if any)
+└── package.json
+```
+
+## 🎯 Key Features Breakdown
+
+### **Hero Section**
+- Animated name with gradient text
+- Typewriter effect for tagline
+- Floating 3D particles background
+- Auto-hiding scroll indicator
+
+### **About Me**
+- Technology icons with hover effects
+- Responsive grid layout
+- Smooth scroll animations
+
+### **Projects Carousel**
+- Fluid transitions between projects
+- Interactive and static project types
+- Technology badges with matching colors
+- Responsive image galleries
+
+### **Contact System**
+- Floating action buttons
+- Email modal with copy functionality
+- Auto-hide when footer is visible
+- Success notifications
+
+### **Footer**
+- Neon illumination effects from bottom
+- Social media links with hover glows
+- Animated particles
+- Professional contact information
+
+## 🌈 Design Philosophy
+
+### **Visual Identity**
+- **Color Scheme:** Neon gradients (cyan, purple, emerald, pink)
+- **Typography:** Modern sans-serif with monospace accents
+- **Animations:** Smooth, purposeful transitions
+- **Layout:** Clean, minimal, content-focused
+
+### **User Experience**
+- **Performance First:** Optimized loading and animations
+- **Accessibility:** ARIA labels and keyboard navigation
+- **Mobile Responsive:** Touch-friendly interactions
+- **Progressive Enhancement:** Works without JavaScript
+
+## 📊 Performance Optimizations
+
+- **Lazy Loading** - Components and images load on demand
+- **Code Splitting** - Automatic route-based splitting
+- **Image Optimization** - Next.js automatic image optimization
+- **Bundle Analysis** - Webpack bundle optimization
+
+
+## 📈 Future Enhancements
+
+- [ ] Dark/Light theme toggle
+- [ ] More interactive 3D elements
+- [ ] Progressive Web App features
+
+## 🤝 Contributing
+
+While this is a personal portfolio, suggestions and feedback are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📬 Contact
+
+- **Email:** omarvzaga@gmail.com
+- **GitHub:** [@omar2711](https://github.com/omar2711)
+- **LinkedIn:** [Omar Veizaga](https://www.linkedin.com/in/omarv27/)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+**Built with ❤️ by Omar Santiago Veizaga Ochoa**
+
+> "Something need doin'? I can do that!" - Ready to bring your ideas to life.
+
+---
+
+### 🏷️ Tags
+`portfolio` `nextjs` `react` `typescript` `threejs` `tailwindcss` `web-development` `frontend` `fullstack` `interactive-design`

@@ -6,11 +6,13 @@ import FloatingGroup from "./components/technologies/floatingGroup";
 import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [viewportHeight, setViewportHeight] = useState(0);
   const aboutMeRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const setVH = () => {
       const vh = window.innerHeight * 0.01;
@@ -52,6 +54,7 @@ export default function HomePage() {
           <AboutMe />
         </div>
         <Contact />
+        <Footer />
       </div>
     </main>
   );

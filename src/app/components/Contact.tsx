@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Github, Mail, X, Check } from 'lucide-react';
 
 const Contact = () => {
@@ -8,6 +8,8 @@ const Contact = () => {
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showCopiedNotification, setShowCopiedNotification] = useState(false);
   const [isNotificationVisible, setIsNotificationVisible] = useState(false);
+  const [showButtons, setShowButtons] = useState(true);
+  const footerObserverRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,6 +21,41 @@ const Contact = () => {
     }, 500);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const sentinelElement = document.createElement('div');
+    sentinelElement.style.height = '1px';
+    sentinelElement.style.position = 'absolute';
+    sentinelElement.style.bottom = '0';
+    sentinelElement.style.width = '100%';
+    sentinelElement.setAttribute('data-footer-sentinel', 'true');
+
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.style.position = 'relative';
+      footer.appendChild(sentinelElement);
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+
+          setShowButtons(!entry.isIntersecting);
+        },
+        {
+          threshold: 0,
+          rootMargin: '0px 0px -200px 0px'
+        }
+      );
+
+      observer.observe(sentinelElement);
+
+      return () => {
+        observer.disconnect();
+        if (sentinelElement.parentNode) {
+          sentinelElement.parentNode.removeChild(sentinelElement);
+        }
+      };
+    }
   }, []);
 
   const handleGithubClick = () => {
@@ -82,7 +119,13 @@ const Contact = () => {
         </div>
       )}
 
-      <div className="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+      <div 
+        className={`fixed bottom-8 right-8 flex flex-col gap-4 z-50 transition-all duration-500 ease-in-out ${
+          showButtons 
+            ? 'opacity-100 translate-y-0 pointer-events-auto' 
+            : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+      >
         <button
           onClick={handleEmailClick}
           className={`

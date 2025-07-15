@@ -12,11 +12,13 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
   const [isSticky, setIsSticky] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [particlesKey, setParticlesKey] = useState(0)
+  const [showScrollButton, setShowScrollButton] = useState(true)
   const progressRef = useRef({ value: 0, lastTime: 0 })
   const requestRef = useRef<number>(0)
   const textRef = useRef<HTMLHeadingElement>(null)
   const diagonalRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleLoad = () => {
@@ -25,6 +27,24 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
     window.addEventListener('load', handleLoad)
     return () => window.removeEventListener('load', handleLoad)
   }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowScrollButton(entry.intersectionRatio > 0.5);
+      },
+      { 
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: '-100px 0px -100px 0px'
+      }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const animate = (timestamp: number) => {
     if (!progressRef.current.lastTime) {
@@ -65,7 +85,7 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
   }, [])
 
   return (
-    <div className="relative">
+    <div className="relative" ref={heroRef}>
       <div
         className="relative w-full min-h-screen text-white overflow-hidden"
         style={{
@@ -128,10 +148,16 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50">
+        <div 
+          className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
+            showScrollButton 
+              ? 'opacity-100 translate-y-0 pointer-events-auto' 
+              : 'opacity-0 translate-y-4 pointer-events-none'
+          }`}
+        >
           <button
             onClick={onScrollToAbout}
-            className="group p-4 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+            className="group relative p-4 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm overflow-hidden"
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               border: '2px solid rgba(255, 255, 255, 0.3)',
@@ -148,13 +174,21 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
             }}
             aria-label="Scroll to About Me section"
           >
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
+            
             <FaChevronDown 
-              className="text-white text-xl sm:text-2xl animate-bounce" 
+              className="relative text-white text-xl sm:text-2xl animate-bounce transition-all duration-300 group-hover:scale-110" 
               style={{
                 filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))'
               }}
             />
           </button>
+
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <p className="text-white text-xs sm:text-sm whitespace-nowrap bg-black bg-opacity-50 px-3 py-1 rounded-full backdrop-blur-sm">
+              Explore More
+            </p>
+          </div>
         </div>
       </div>
     </div>
