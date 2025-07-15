@@ -118,14 +118,14 @@ const TecnologiasCanvas = () => {
 };
 
 function ElasticOrbitControls() {
-  const controlsRef = useRef<any>(null);
+  const controlsRef = useRef<React.ElementRef<typeof OrbitControls>>(null);
   const targetPolar = Math.PI / 2;
   const elasticRange = 0.5;
 
   useFrame(() => {
     const controls = controlsRef.current;
     if (controls) {
-      if (!controls.dragging) {
+      if (controls.enabled) {
         controls.setPolarAngle(
           controls.getPolarAngle() +
             (targetPolar - controls.getPolarAngle()) * 0.1

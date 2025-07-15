@@ -42,29 +42,6 @@ export default function Hero({ onScrollToAbout }: HeroProps) {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const animate = (timestamp: number) => {
-      if (!progressRef.current.lastTime) {
-        progressRef.current.lastTime = timestamp
-      }
-      const delta = timestamp - progressRef.current.lastTime
-      progressRef.current.value += delta * 0.02
-      progressRef.current.lastTime = timestamp
-      if (textRef.current) {
-        textRef.current.style.backgroundPosition = `${progressRef.current.value % 150}% 50%`
-      }
-      requestRef.current = requestAnimationFrame(animate)
-    }
-
-    requestRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current)
-      }
-    }
-  }, [])
-
   return (
     <div className="relative" ref={heroRef}>
       <div
