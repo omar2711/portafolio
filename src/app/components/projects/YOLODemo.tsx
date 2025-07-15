@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
+import { FaGithub } from 'react-icons/fa';
 
 const YOLODemo: React.FC = () => {
   const [processing, setProcessing] = useState(false);
@@ -249,10 +250,36 @@ const YOLODemo: React.FC = () => {
       </div>
 
       <div className="mt-2 text-center text-xs text-gray-400 flex-shrink-0">
-        <p className="truncate">
+        <p className="truncate mb-2">
           {processing && <span className="ml-1">This may take a while :p</span>}
           {!processing && <span className="opacity-50">Free API endpoint</span>}
         </p>
+        
+        <div className="flex justify-center gap-2 sm:gap-3 mt-2">
+          <a
+            href="https://github.com/omar2711/bkportafolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group px-2 py-1 sm:px-3 sm:py-1.5 text-xs bg-gray-800 hover:bg-gray-700 text-white rounded transition-all duration-300 hover:scale-105 border border-gray-600 hover:border-gray-500"
+          >
+            <span className="flex items-center gap-1">
+              <FaGithub className="text-sm" />
+              <span className="hidden sm:inline">View </span>API Code
+            </span>
+          </a>
+          
+          <a
+            href="https://bkportafolio.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group px-2 py-1 sm:px-3 sm:py-1.5 text-xs bg-red-800 hover:bg-red-700 text-white rounded transition-all duration-300 hover:scale-105 border border-red-600 hover:border-red-500"
+          >
+            <span className="flex items-center gap-1">
+              <span>🔥</span>
+              <span className="hidden sm:inline">API </span>Docs
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   );
