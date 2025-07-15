@@ -294,7 +294,7 @@ function AboutMeContent() {
             className="min-h-[200px] sm:min-h-[300px] lg:min-h-[450px]"
           >
             <AboutSection.Title color="#2ee8bb">
-              What I've <br/> Worked &nbsp; With
+              What I&apos;ve <br/> Worked &nbsp; With
             </AboutSection.Title>
             <div className="flex flex-col gap-2 sm:gap-3 text-center w-full">
               <div className="text-white">
